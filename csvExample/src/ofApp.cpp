@@ -72,8 +72,8 @@ void ofApp::draw()
     // ofDrawBitmapString("csv cols: " + ofToString(csv.getNumCols()), 200, 90);
 
     // Print out all rows and cols.
-    for(int i = 0; i < csv.getNumRows() / 100; i++)
-        for(int j = 0; j < csv.getNumCols(i); j++)
+    for (unsigned int i = 0; i < csv.getNumRows() / 100; i++)
+        for (unsigned int j = 0; j < csv.getNumCols(i); j++)
             ofDrawBitmapString(to_string(j) + csv[i][j], 5 + j * 200, 20 + i * 20);
 }
 

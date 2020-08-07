@@ -83,7 +83,7 @@ void ofxCsvRow::expand(int cols) {
 	if(data.empty()) {
 		cols = max(cols, 1);
 	}
-	while(data.size() <= cols) {
+	while((int)data.size() <= cols) {
 		data.push_back("");
 	}
 }
@@ -113,7 +113,7 @@ unsigned int ofxCsvRow::getNumCols() const {
 
 //--------------------------------------------------
 int ofxCsvRow::getInt(int col) const {
-	if(col >= data.size()) {
+	if(col >= (int)data.size()) {
 		return 0;
 	}
 	return ofToInt(data[col]);
@@ -121,7 +121,7 @@ int ofxCsvRow::getInt(int col) const {
 
 //--------------------------------------------------
 float ofxCsvRow::getFloat(int col) const {
-	if(col >= data.size()) {
+	if(col >= (int)data.size()) {
 		return 0.0f;
 	}
 	return ofToFloat(data[col]);
@@ -129,7 +129,7 @@ float ofxCsvRow::getFloat(int col) const {
 
 //--------------------------------------------------
 string ofxCsvRow::getString(int col) const {
-	if(col >= data.size()) {
+	if(col >= (int)data.size()) {
 		return "";
 	}
 	return data[col];
@@ -137,7 +137,7 @@ string ofxCsvRow::getString(int col) const {
 
 //--------------------------------------------------
 bool ofxCsvRow::getBool(int col) const {
-	if(col >= data.size()) {
+	if(col >= (int)data.size()) {
 		return false;
 	}
 	return ofToBool(data[col]);
@@ -220,7 +220,7 @@ void ofxCsvRow::insertBool(int col, bool what) {
 
 //--------------------------------------------------
 void ofxCsvRow::remove(int col) {
-	if(col < data.size()) {
+	if(col < (int)data.size()) {
 		data.erase(data.begin()+col);
 	}
 }
@@ -338,7 +338,7 @@ vector<string> ofxCsvRow::fromString(const string &row, const string &separator)
 	vector<string> fields {""};
 	
 	size_t i = 0; // index of the current field
-	int s = 0; // index in the separator
+	unsigned int s = 0; // index in the separator
 	
 	// separator char tracking
 	char sepStart = ','; // default

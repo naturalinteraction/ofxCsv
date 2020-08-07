@@ -73,7 +73,7 @@ bool ofxCsv::load(const string &path, const string &separator, const string &com
 	
 	// open file & read each line
 	int lineCount = 0;
-	int maxCols = 0;
+	unsigned int maxCols = 0;
 	ofBuffer buffer = ofBufferFromFile(file.getAbsolutePath());
 	for(auto line : buffer.getLines()) {
 		
@@ -210,7 +210,7 @@ void ofxCsv::expand(int rows, int cols) {
 		rows = max(rows, 1);
 	}
 	cols = max(cols, 1);
-	while(data.size() < rows) {
+	while((int)data.size() < rows) {
 		data.push_back(ofxCsvRow());
 	}
 	for(auto &row : data) {
@@ -235,7 +235,7 @@ unsigned int ofxCsv::getNumRows() const {
 
 //--------------------------------------------------
 unsigned int ofxCsv::getNumCols(int row) const {
-	if(row > -1 && row < data.size()) {
+	if(row > -1 && row < (int)data.size()) {
 		return data[row].size();
 	}
 	return 0;
@@ -284,7 +284,7 @@ void ofxCsv::insertRow(int index, ofxCsvRow &row) {
 
 //--------------------------------------------------
 void ofxCsv::removeRow(int index) {
-	if(index < data.size()) {
+	if(index < (int)data.size()) {
 		data.erase(data.begin()+index);
 	}
 }
@@ -382,7 +382,7 @@ bool ofxCsv::empty() const {
 
 //--------------------------------------------------
 void ofxCsv::trim() {
-	for(int row = 0; row < data.size(); row++) {
+	for(unsigned int row = 0; row < data.size(); row++) {
 		data[row].trim();
 	}
 }
@@ -421,7 +421,7 @@ string ofxCsv::getComment() const {
 
 //--------------------------------------------------
 void ofxCsv::expandRow(int row, int cols) {
-	while(data.size() <= row) {
+	while((int)data.size() <= row) {
 		data.push_back(ofxCsvRow());
 	}
 	data[row].expand(cols);
